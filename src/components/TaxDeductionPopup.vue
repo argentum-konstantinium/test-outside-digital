@@ -186,7 +186,7 @@ export default {
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: repeat(3, min-content) auto;
-  height: calc(100vh - 64px);
+  min-height: calc(100vh - 64px);
 
   &__headline {
     @include font-cfg(18px, #000000, 500);
