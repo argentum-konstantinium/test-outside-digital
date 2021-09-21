@@ -1,0 +1,12 @@
+.show-enter-active {
+  position: absolute;
+  opacity: 0;
+  transform: rotateX(-90deg);
+  transition: all 0.3s;
+}
+.show-leave-active {
+  position: absolute;
+  opacity: 0;
+  transform: rotateX(-90deg);
+  transition: all 0.3s;
+}
