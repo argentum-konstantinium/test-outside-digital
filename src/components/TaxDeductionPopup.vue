@@ -187,7 +187,7 @@ export default {
   grid-template-columns: 100%;
   grid-template-rows: repeat(3, min-content) auto;
   min-height: calc(100vh - 64px);
-
+  max-height: 740px;
   &__headline {
     @include font-cfg(18px, #000000, 500);
     margin-bottom: 0.888em;
@@ -251,7 +251,7 @@ export default {
 
 @media (min-width: 768px) {
   .tax-deduction {
-    height: unset;
+    min-height: unset;
 
     &__headline {
       font-size: 20px;
