@@ -43,8 +43,8 @@ import TextInput from "@/components/basic/TextInput";
 import BasicButton from "@/components/basic/BasicButton";
 import BasicTag from '@/components/basic/BasicTag'
 import TaxDeductionPayment from "@/components/TaxDeductionPayment";
-import mixin from '@/mixins/mixin'
-import api from '@/api/api'
+import {pluralize} from "@/utils/pluralize";
+import api from '@/api/api';
 export default {
   name: 'TaxDeductionPopup',
   components: {
@@ -54,7 +54,6 @@ export default {
     BasicButton,
     BasicTag
   },
-  mixins: [mixin],
   data() {
     return {
       salaryNumber: 0,
@@ -143,8 +142,6 @@ export default {
       }
     },
     setPosition(event) {
-      window.test = event;
-      console.log('ok')
       event.target.setSelectionRange(event.target.value.length - 1, event.target.value.length - 1)
     },
     calculatePayments() {
@@ -155,21 +152,21 @@ export default {
       }
       this.error = false
       this.errorMsg = ''
-      const apartmentCost = 260_000
+      const maxDeduction = 260_000
       const yearSalary = this.salaryNumber * 12
       const deduction = parseInt(`${yearSalary * 0.13}`)
-      const remainder = apartmentCost % deduction
+      const remainder = maxDeduction % deduction
       const paymentsArr = []
-      const years = Math.ceil(260_000 / deduction)
+      const years = Math.ceil(maxDeduction / deduction)
       for (let year = 1; year <= years; year += 1) {
         const payment = {
           paymentDate: (year === 2 ? 'во ' : 'в ') + year + ' год'
         }
         if (year === years && remainder !== 0) {
-          payment.payment = remainder + this.pluralize(remainder, [' рубль', ' рубля', ' рублей'])
+          payment.payment = remainder + pluralize(remainder, [' рубль', ' рубля', ' рублей'])
           paymentsArr.push(payment)
         } else {
-          payment.payment = deduction + this.pluralize(deduction, [' рубль', ' рубля', ' рублей'])
+          payment.payment = deduction + pluralize(deduction, [' рубль', ' рубля', ' рублей'])
           paymentsArr.push(payment)
         }
       }
